@@ -26,21 +26,33 @@ passport.use(new GoogleStrategy({
 					callbackURL: '/auth/google/callback',
 					proxy : true					
 				}, 
-				(accessToken, refreshToken, profile, done ) => {
-					//console.log('accessToken', accessToken);
-					//console.log('refreshToken', refreshToken);
-					//console.log('profile', profile);
-					User.findOne({googleId: profile.id})
-					.then((existingUser) => {
-						if (existingUser){
-							//Do nothing as we already ahave a user record with the googleId
-							done(null , existingUser);
-						} else {
-							new User({ googleId: profile.id })
-							.save()
-							.then(user => done(null, user));
-						}
-					 })
-					
-				})
+				async (accessToken, refreshToken, profile, done ) => {					
+					const existingUser = await User.findOne({googleId: profile.id})					
+					if (existingUser) //Do nothing as we already ahave a user record with the googleId						
+						return done(null , existingUser);					
+					const user = await new User({ googleId: profile.id }).save()
+					done(null, user);										 				
+				})	
+
+
+				//Now refactored with await async syntax instead of chained promises
+				
+				/*
+					(accessToken, refreshToken, profile, done ) => {
+						//console.log('accessToken', accessToken);
+						//console.log('refreshToken', refreshToken);
+						//console.log('profile', profile);
+						User.findOne({googleId: profile.id})
+						.then((existingUser) => {
+							if (existingUser){
+								//Do nothing as we already ahave a user record with the googleId
+								done(null , existingUser);
+							} else {
+								new User({ googleId: profile.id })
+								.save()
+								.then(user => done(null, user));
+							}
+						 })					
+					})
+				*/
 );
