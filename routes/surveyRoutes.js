@@ -13,8 +13,7 @@ module.exports = app => {
 	app.get("/api/surveys", requireLogin, async (req, res) => {
 		const surveys = await Survey.find({ _user: req.user.id }).select({
 			recipients: false
-		});
-		console.log(surveys);
+		});		
 		res.send(surveys);
 	});
 
@@ -53,10 +52,7 @@ module.exports = app => {
 					}
 				).exec();
 			})
-			.value();
-
-		console.log(events);
-
+			.value();		
 		res.send({});
 	});
 
@@ -72,15 +68,12 @@ module.exports = app => {
 			}),
 			_user: req.user.id,
 			dateSent: Date.now()
-		});
-		//console.log(survey);
+		});		
 		try {
 			//construct Mail
-			const mailer = new Mailer(survey, surveyTemplate(survey));
-			//console.log(mailer);
+			const mailer = new Mailer(survey, surveyTemplate(survey));			
 			await mailer.send();
-			const my = await survey.save();
-			console.log(my);
+			const my = await survey.save();			
 			req.user.credits = req.user.credits - 1;
 			const user = await req.user.save();
 			res.send(user);
