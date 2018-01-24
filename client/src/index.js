@@ -8,6 +8,9 @@ import reduxThunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 
+/* FOR TESTING ONLY*/
+import axios from 'axios';
+window.axios = axios;
 
 
 
@@ -20,5 +23,4 @@ ReactDOM.render(
 	document.querySelector('#root')
 );
 
-//console.log('strip key is :' + process.env.REACT_APP_STRIPE_KEY);
-//console.log('Env is :' + process.env.NODE_ENV);
+
