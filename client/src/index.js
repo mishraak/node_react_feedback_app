@@ -9,8 +9,8 @@ import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 
 /* FOR TESTING ONLY*/
-//import axios from "axios";
-//window.axios = axios;
+import axios from "axios";
+window.axios = axios;
 
 const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 

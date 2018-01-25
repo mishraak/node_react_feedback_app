@@ -22,6 +22,8 @@ module.exports = app => {
 	});
 
 	app.post("/api/surveys/webhooks", (req, res) => {
+		console.log("webhook request body : \n " + req.body);
+
 		const p = new Path("/api/surveys/:surveyId/:choice");
 
 		const events = _.chain(req.bo)
@@ -53,7 +55,9 @@ module.exports = app => {
 				).exec();
 			})
 			.value();
-		res.send({});
+
+			console.log("Events received on webhook : \n" + events);				
+			res.send({});
 	});
 
 	app.post("/api/surveys", requireLogin, requireCredits, async (req, res) => {
