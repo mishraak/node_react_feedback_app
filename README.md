@@ -1,8 +1,8 @@
-#FeedbackApp
+# FeedbackApp
 
-Info : Feedback collection app for product owner, also usable to conduct any survey
+# Info : Feedback collection app for product owner, also usable to conduct any survey
 
-Below features have been implemented:
+## Below features have been implemented:
 1. Google OAuth Integration with the App
 2. Handling credits and top-up using Stripe payment APIs
 3. Integrated Sendgrid Node JS APIs with the app
@@ -14,7 +14,7 @@ Below features have been implemented:
 9. Data validation in the forms
 10. Handled private keys for APIs using a separate config file which is not checked into repo
 
-Technologies used:
+## Technologies used:
 1. Node JS for the backend
 2. Express JS for the middleware services
 3. Passport JS for authentication (used Google Strategy)
@@ -30,7 +30,7 @@ Technologies used:
 13. SendGrid for handling email activities like sending email, creating webhook
 14. Localtunnel to create a webhook on local environment for testing purpose
 
-In order to test the app,
+## In order to test the app,
 
 Sign in to https://blooming-ridge-82966.herokuapp.com using Google Account
 Every new user is provided with 3 initial credits.
